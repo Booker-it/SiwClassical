@@ -1,0 +1,36 @@
+header {
+  color: white;
+  height: 3em;
+  padding: 0.2em;
+  text-align: right; 
+}
+
+header a { 
+	text-decoration: none; 
+    color: white;
+    font-size: 1.2em;
+}
+
+li{
+	list-style: none;
+}
+ul{
+	list-style-type: none;
+}
+
+ .col button{
+	margin-top: 15% ;
+	margin-left: 10%;
+}
+
+img{
+	object-fit: cover;
+}
+
+.background{
+	background-image: url('/images/mano.jpg');
+	background-size: cover;
+	background-repeat: no-repeat;
+	height: 40vh;
+	background-position: center;
+}

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<title>
+		SiwClassical - Gestione eventi
+	</title>
+	<link rel="stylesheet" href="/css/stile2.css" />
+	<link rel="stylesheet" href="/css/eventFoto.css" />
+	<div th:replace="~{/fragments/fonts :: fonts}"></div>
+	<div th:replace="~{/fragments/viewport :: viewport}"></div>
+	<div th:replace="~{/fragments/bootstrap :: bootstrap}"></div>
+</head>
+
+<body>
+	<div class="background">
+		<header>
+			<div th:replace="~{/fragments/header :: header}"></div>
+		</header>
+	</div>
+
+	
+	<div class="hm container bg-body-tertiary pt-5 rounded mt-3">
+		<h1> Gestione Eventi </h1>
+		<span><a href="/admin/formNewEvent"> <button type="button" class="btn btn-outline-dark"> Inserisci i dati di un evento</button></a></span>
+		
+		<span><a href="/admin/manageEvents"> <button type="button" class="btn btn-warning">Gestisci eventi</button> </a></span>
+	</div>
+
+</body>
+</html>
+

@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<title>
+		Update Event
+	</title>
+	<link rel="stylesheet" href="/css/stile.css" />
+	<link rel="stylesheet" href="/css/eventFoto.css" />
+	<div th:replace="~{/fragments/fonts :: fonts}"></div>
+	<div th:replace="~{/fragments/viewport :: viewport}"></div>
+	<div th:replace="~{/fragments/bootstrap :: bootstrap}"></div>
+</head>
+<style>
+	.c-item{
+	text-align: end;
+	padding-bottom: 1%;
+	padding-right: 1%;
+}
+</style>
+
+
+<body>
+	<div class="background">
+		<header>
+			<div th:replace="~{/fragments/header :: header}"></div>
+		</header>
+	</div>
+	
+	
+	
+	<main class="container">
+	
+	<div>
+		<h1 th:text="${event.name} + ' - ' + ${event.location}"></h1>
+	</div>
+	
+	<div class="pb-3">
+			<span th:text="${#temporals.format(event.dateEvent, 'dd-MM-yyyy HH:mm')} + ' ' + ${event.city}"></span>
+	</div>
+	
+		<div class="pb-4 pt-2">
+			<a th:href="@{'/admin/removeEvent/' + ${event.id}}"><button class="btn btn-danger" type="button">Elimina questo evento</button></a>
+		</div>
+
+	<h2> Aggiorna evento</h2>
+	
+	
+	
+	<div class="album">
+			<div class="row row-cols-6 col">
+					<div >
+						<title>Placeholder</title>
+						<p th:if="${event.poster}">
+							<img width="100%"  th:src="@{'/display/image/' + ${event.poster.id}}"/>
+						</p>
+					</div>
+			</div>
+		</div>
+	
+	<div class="pb-5">
+		<a th:href="@{'/admin/posterChange/' + ${event.id}}"><button class="btn btn-outline-warning" type="button">Cambia poster</button></a>
+	</div>
+	
+	<h3>Solista</h3>
+	<div th:if="${event.soloist}">
+		
+		<p th:text="${event.soloist.name} + ' ' + ${event.soloist.surname}"></p>
+		<a th:href="@{'/admin/addSoloist/' + ${event.id}}"><button class="btn btn-outline-warning" type="button">Modifica Solista</button></a>
+		<a th:href="@{'/admin/removeSoloistFromEvent/' + ${event.soloist.id} + '/' + ${event.id}}"><button class="btn btn-outline-danger" type="button">Rimuovi Solista</button></a>
+	</div>
+	
+	<div th:unless="${event.soloist}">
+		<p>Nessun solista</p>
+		<a th:href="@{'/admin/addSoloist/' + ${event.id}}"><button class="btn btn-outline-success" type="button">Aggiungi Solista</button></a>
+	</div>
+	
+	
+	
+	<h3 class="pt-5">Orchestra:</h3>
+	<div th:if="${event.orchestra.isEmpty()}"
+	<p>Nessuna orchestra</p>
+	<a th:href="@{'/admin/updateOrchestra/' + ${event.id}}">
+		<button class="btn btn-outline-warning" type="button">Aggiungi</button></a>
+	</div>
+	
+	<div th:each="musician: ${event.orchestra}">
+		<div>
+			<p th:text="${musician.name} + ' ' + ${musician.surname}">Martha Argherich</p>
+		</div>
+	</div>
+	
+	<div th:if="${!event.orchestra.isEmpty()}">
+		<a th:href="@{'/admin/updateOrchestra/' + ${event.id}}">
+			<button class="btn btn-outline-warning" type="button">Modifica</button></a>
+		</div>
+		
+		
+		<h3 class="pt-5">Direttore d'orchestra: </h3>
+		
+		<div th:if="${event.orchestraDirector}">
+			
+			<span th:text="${event.orchestraDirector.name} + ' ' + ${event.orchestraDirector.surname}"></span>
+			<a th:href="@{'/admin/addOrchestraDirector/' + ${event.id}}"><button class="btn btn-outline-warning" type="button">Modifica direttore d'orchestra</button></a>
+			<a th:href="@{'/admin/removeOrchestraDirectorFromEvent/' + ${event.orchestraDirector.id} + '/' + ${event.id}}"><button class="btn btn-outline-danger" type="button">Rimuovi direttore d'orchestra</button></a>
+			
+		</div>
+		
+		<div th:unless="${event.orchestraDirector}">
+			<p>Nessun direttore d'orchestra</p>
+			<a th:href="@{'/admin/addOrchestraDirector/' + ${event.id}}"><button class="btn btn-outline-success" type="button">Aggiungi direttore d'orchestra</button></a>
+		</div>
+		
+		
+		
+		<h1 class="pt-5 pb-2"> Recensioni: </h1>
+		<div th:if="${event.reviews==null || event.reviews.isEmpty()}">Non ci sono recensioni ancora!</div>
+		<ul>
+			<li th:each="review: ${event.reviews}">
+				<div class="bg-body-tertiary mb-3">
+					<div class="d-flex text-body-secondary pt-3 ">
+						<p class="material-icons"> account_circle</p>
+
+						<p class="pb-3 mb-0 small lh-sm border-bottom">
+							<strong class="d-block text-gray-dark" th:text="'Voto: ' + ${review.rating} +'/5'">Voto</strong>
+							
+							<span th:text="${review.author.name}">Autore</span>
+						</p>
+					</div>
+					<strong th:text="'Titolo:'"></strong>
+					<span th:text="${review.title}">titolo</span>
+					
+					<div>
+						<strong th:text="'Commento:'"></strong>
+						<span th:text="${review.text}">Commento</span>
+					</div>
+					
+					<p class="pt-3 c-item"> <a th:href="@{'/admin/removeReview/' + ${review.id}}">
+						<button class="btn btn-outline-danger" type="button">Elimina recensione</button></a>
+					</p>
+				</div>
+			</li>
+		</ul>
+		</main>
+	</body>
+	</html>

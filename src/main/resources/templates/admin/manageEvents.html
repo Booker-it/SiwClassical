@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<title>
+		Eventi
+	</title>
+	<link rel="stylesheet" href="/css/stile.css" />
+	<link rel="stylesheet" href="/css/eventFoto.css" />
+	<div th:replace="~{/fragments/fonts :: fonts}"></div>
+	<div th:replace="~{/fragments/viewport :: viewport}"></div>
+	<div th:replace="~{/fragments/bootstrap :: bootstrap}"></div>
+</head>
+
+<body>
+	<div class="background">
+		<header>
+			<div th:replace="~{/fragments/header :: header}"></div>
+		</header>
+	</div>
+	
+	<ul class="list-group container">
+		<h1>Eventi</h1>
+		<div th:if="${events.isEmpty()}">Non ci sono eventi nel sistema</div>
+		<li class="list-group-item" th:each="event : ${events}">
+			<span th:text="${event.name} + ' ' + ${event.location}"></span>
+			<span th:text="${#temporals.format(event.dateEvent, 'dd-MM-yyyy HH:mm')}"></span>
+			<span  th:text="${event.city}"></span>
+			<a th:href="@{'/admin/formUpdateEvent' + '/' + ${event.id}}">Aggiorna</a>
+		</li>
+	</ul>
+
+</body>
+</html>
+

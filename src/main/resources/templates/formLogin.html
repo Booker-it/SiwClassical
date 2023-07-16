@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>
+		SiwClassical - Login
+	</title>
+	<link rel="stylesheet" href="/css/stile.css" />
+	<div th:replace="~{/fragments/fonts :: fonts}"></div>
+	<div th:replace="~{/fragments/viewport :: viewport}"></div>
+	<div th:replace="~{/fragments/bootstrap :: bootstrap}"></div>
+</head>
+
+<style>
+body{
+	background-image: url('./images/background.jpg');
+	background-size: cover;
+	background-repeat: no-repeat;
+	height: 150vh;
+	background-position: center;
+}
+
+</style>
+
+<body >
+	<header>
+		<div th:replace="~{/fragments/header :: header}"></div>
+	</header>
+
+	<div class="container col-xl-10 col-xxl-8 px-4 py-5">
+		<div class="row align-items-center g-lg-5 py-5">
+			<div class="col-md-10 mx-auto col-lg-5">
+				<form class="p-4 p-md-5 border rounded-3 bg-body-tertiary" th:action="@{/login}" method="POST">
+					<h1>Accedi</h1>
+					<div class="form-floating mb-3">
+						<input type="text" class="form-control" id="floatingInput" name="username" placeholder="username">
+						<label for="floatingInput">Username</label>
+					</div>
+					<div class="form-floating mb-3">
+						<input type="password" class="form-control" name="password" id="floatingPassword" placeholder="Password">
+						<label for="floatingPassword">Password</label>
+					</div>
+					<div>
+						<span th:if="${param.error != null}" th:style="'color:red'">Username o password errati</span>
+					</div>
+					<button class="w-100 btn btn-lg btn-dark" type="submit">Login</button>
+					<hr class="my-4">
+					<small class="text-body-secondary"><a th:href="@{/register}" th:text="Registrati">Registrati</a></small>
+				</form>
+			</div>
+		</div>
+	</div>
+
+</body>
+</html>

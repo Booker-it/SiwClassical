@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<title>
+		Classical Event
+	</title>
+	<link rel="stylesheet" href="/css/stile.css" />
+	<link rel="stylesheet" href="/css/eventFoto.css" />
+	<div th:replace="~{/fragments/fonts :: fonts}"></div>
+	<div th:replace="~{/fragments/viewport :: viewport}"></div>
+	<div th:replace="~{/fragments/bootstrap :: bootstrap}"></div>
+</head>
+
+<body>
+	<div class="background">
+		<header>
+			<div th:replace="~{/fragments/header :: header}"></div>
+		</header>
+	</div>
+	
+	<main class="container">
+		
+		<div class="pt-5">
+			<h1 th:text="${event.name} + ' - ' + ${event.location}"></h1>
+		</div>
+		
+		<div class="pb-3">
+			<span th:text="${#temporals.format(event.dateEvent, 'dd-MM-yyyy HH:mm')} + ' ' + ${event.city}"></span>
+		</div>
+		<span>
+			<a th:href="@{'/registered/formAddGroup/' + ${event.id}}"><button class="btn btn-primary" type="button">Crea un gruppo</button></a>
+			
+			<a th:href="@{'/registered/indexGroup/' + ${event.id}}"><button class="btn btn-primary" type="button">Cerca qualcuno con cui andare</button></a>
+		
+		</span>
+		
+		<h2 class="pt-5"> Organizzazione concerto</h2>
+		<div class="row mb-2">
+			<div class="col-md-6">
+				<div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
+					<div class="col p-4 d-flex flex-column position-static">
+						<h3 class="mb-0">Solista:</h3>
+						<div th:if="${event.soloist}">
+							<span class="card-text mb-auto" th:text="${event.soloist.name} + ' ' + ${event.soloist.surname}">Martha Argherich</span>
+						</div>
+						<div th:unless="${event.soloist}">Nessun solista</div>
+					</div>
+					<div class="col-auto d-none d-lg-block"  th:if="${event.soloist!=null && event.soloist.photo!=null }">
+						<img class="bd-placeholder-img" width="200" height="250"  th:src="@{'/display/image/'} + ${event.soloist.photo.id}"  role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false" />
+					</div>
+				</div>
+			</div>
+		
+		
+		<div class="row mb-2">
+			<div class="col-md-6">
+				<div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
+					<div class="col p-4 d-flex flex-column position-static">
+						<h3 class="mb-0">Orchestra:</h3>
+						<div th:if="${event.orchestra.isEmpty()}">
+							<div>Nessuna Orchestra</div>
+						</div>
+						
+						
+						<div th:each="musician: ${event.orchestra}">
+							<span class="card-text mb-auto" th:text="${event.soloist.name} + ' ' + ${event.soloist.surname}">Martha Argherich</span>
+						</div>
+					</div>
+					<div class="col-auto d-none d-lg-block">
+						<img class="bd-placeholder-img" width="200" height="250"  src="/images/concerto.jpg"  role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false" />
+					</div>
+				</div>
+			</div>
+		
+		
+		<div class="row mb-2">
+			<div class="col-md-6">
+				<div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
+					<div class="col p-4 d-flex flex-column position-static">
+						<h3 class="mb-0">Direttore d'orchestra:</h3>
+						<div th:if="${event.orchestraDirector}">
+							<span class="card-text mb-auto" th:text="${event.orchestraDirector.name} + ' ' + ${event.orchestraDirector.surname}">Martha Argherich</span>
+						</div>
+						<div th:unless="${event.orchestraDirector}">Nessun direttore d'orchestra</div>
+					</div>
+					<div class="col-auto d-none d-lg-block">
+						<img class="bd-placeholder-img" width="200" height="250"  src="/images/conduttore.jpg"  role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false" />
+					</div>
+				</div>
+			</div>
+		
+		
+		
+		
+		<span >
+			<a th:href="@{'/registered/formAddReview/' + ${event.id}}"><button class="btn btn-outline-dark" type="button">Recensisci questo evento</button></a>
+		</span>
+
+
+		<h1 class="pt-5 pb-2"> Recensioni: </h1>
+		<div th:if="${event.reviews==null || event.reviews.isEmpty()}">Non ci sono recensioni ancora! Sii il primo!!</div>
+		<ul>
+			<li th:each="review: ${event.reviews}">
+				<div class="bg-body-tertiary mb-3">
+					<div class="d-flex text-body-secondary pt-3 ">
+						<p class="material-icons"> account_circle</p>
+						
+						<p class="pb-3 mb-0 small lh-sm border-bottom">
+							<strong class="d-block text-gray-dark" th:text="'Voto: ' + ${review.rating} +'/5'">Voto</strong>
+							
+							<span th:text="${review.author.name}">Autore</span>
+						</p>
+					</div>
+					<strong th:text="'Titolo:'"></strong>
+					<span th:text="${review.title}">titolo</span>
+					
+					<div>
+						<strong th:text="'Commento:'"></strong>
+						<span th:text="${review.text}">Commento</span>
+					</div>
+					
+					<div th:if="${ user!=null && user.equals(review.getAuthor())}"> 
+						<p class="pt-3 c-item"> <a th:href="@{'/register/removeReview/' + ${review.id}}"><button class="btn btn-outline-danger" type="button">Elimina recensione</button></a></p>
+					</div>
+				</div>
+			</li>
+		</ul>
+	</main>
+
+</body>
+</html>
+

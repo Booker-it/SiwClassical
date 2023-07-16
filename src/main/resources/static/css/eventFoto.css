@@ -1,0 +1,7 @@
+.background{
+	background-image: url('/images/mano.jpg');
+	background-size: cover;
+	background-repeat: no-repeat;
+	height: 40vh;
+	background-position: center;
+}

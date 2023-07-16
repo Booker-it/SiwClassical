@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+	<header th:fragment="header" class="p-3">
+    <div class="container">
+      <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
+        <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
+          <li><a href="/" class="material-icons">home</a></li>
+        </ul>
+        <div class="text-end" th:if="${userDetails}">
+			<span th:text="${userDetails.username}"></span>
+			<a href="/logout"><button type="button" class="btn btn-outline-light">Logout</button></a>
+        </div>
+        <div class="text-end" th:unless="${userDetails}">
+			<a  href="/login"><button type="button" class="btn btn-outline-light">Login</button></a>
+			<a  href="/register"><button type="button" class="btn btn-warning">Sign-up</button></a>
+		</div>
+      </div>
+    </div>
+  </header>
+</html>
+
+
+

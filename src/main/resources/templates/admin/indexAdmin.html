@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>
+		Siw-Classical Homepage
+	</title>
+	<link rel="stylesheet" href="/css/stile.css" />
+	<div th:replace="~{/fragments/fonts :: fonts}"></div>
+	<div th:replace="~{/fragments/viewport :: viewport}"></div>
+	<div th:replace="~{/fragments/bootstrap :: bootstrap}"></div>
+</head>
+
+<style>
+	
+body{
+	background-image: url('./images/background.jpg');
+	background-size: cover;
+	background-repeat: no-repeat;
+	height: 100vh;
+	background-position: center;
+}
+
+</style>
+<body>
+	<header>
+		<div th:replace="~{/fragments/header :: header}"></div>
+	</header>
+	
+	
+	<div class="hm container col-xl-10 col-xxl-8 px-4 py-5">
+		<h1> Consulta Eventi Musicali </h1>
+		<span><a href="/event"> <button type="button" class="btn btn-outline-light">Elenco eventi</button> </a></span>
+		
+		<span><a href="/musician"> <button type="button" class="btn btn-outline-light">Elenco musicisti</button> </a></span>
+	</div>
+	
+	<div class="hm2 container col-xl-10 col-xxl-8 px-4 py-5">
+		<h1> Operazioni per amministratore </h1>
+		<span><a href="/admin/indexEvent"> <button type="button" class="btn btn-outline-light">Operazioni sugli eventi</button> </a></span>
+		
+		<span><a href="/admin/indexMusician"> <button type="button" class="btn btn-outline-light">Operazioni sui musicisti</button> </a></span>
+	</div>
+	
+</body>
+</html>
+

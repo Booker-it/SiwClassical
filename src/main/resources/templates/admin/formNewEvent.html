@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<title>
+		Nuovo Evento
+	</title>
+	<link rel="stylesheet" href="/css/stile.css" />
+	<link rel="stylesheet" href="/css/eventFoto.css" />
+	<div th:replace="~{/fragments/fonts :: fonts}"></div>
+	<div th:replace="~{/fragments/viewport :: viewport}"></div>
+	<div th:replace="~{/fragments/bootstrap :: bootstrap}"></div>
+</head>
+
+<body>
+	<div class="background">
+		<header>
+			<div th:replace="~{/fragments/header :: header}"></div>
+		</header>
+	</div>
+
+	<form class="container pt-5" th:action="@{/admin/event}" method="POST" th:object="${event}" enctype="multipart/form-data">
+		<h1>Aggiungi un evento</h1>
+		<div th:if="${#fields.hasGlobalErrors()}">
+			<p th:each="err : ${#fields.globalErrors()}" th:text="${err}">...</p>
+		</div>
+		
+		<div class="form-floating mb-3">
+			<strong>Nome dell'evento: </strong>
+			<span><input class="form-control" type="text" th:field="${event.name}"required /></span>
+			<span th:if="${#fields.hasErrors('name')}" th:errors="*{name}" th:style="'color:red'"></span>
+			
+		</div>
+		
+		<div class="form-floating mb-3">
+			<strong>Luogo in cui si svolge: </strong>
+			<span><input class="form-control" type="text" th:field="${event.location}" required/></span>
+			<span th:if="${#fields.hasErrors('dateEvent')}" th:errors="*{dateEvent}" th:style="'color:red'">
+		</div>
+			
+		<div class="form-floating mb-3">
+			<strong>Citt&agrave; in cui si svolge: </strong>
+			<span><input class="form-control" type="text" th:field="${event.city}" required/></span>
+			<span th:if="${#fields.hasErrors('city')}" th:errors="*{city}" th:style="'color:red'">
+				
+		</div>
+				
+		<div class="form-floating mb-3">
+			<strong>Data in cui si svolge: </strong>
+			<span><input class="form-control" type="datetime-local" th:field="${event.dateEvent}" required /></span>
+			<span th:if="${#fields.hasErrors('dateEvent')}" th:errors="*{dateEvent}" th:style="'color:red'">
+		</div>
+					
+			<h2>Poster Evento</h2>
+		<div class="form-floating mb-3">
+			<span><input class="form-control" type="file" name="image" accept="image/png, image/jpeg" required/></span>
+			<span th:if="${#fields.hasErrors('poster')}" th:errors="*{poster}"></span>  <!--non stampa erroreMess -->
+		</div>
+					
+		<div>
+			<button class="btn btn-outline-dark" type="submit"> Conferma</button>
+		</div>
+
+	</form>
+
+</body>
+</html>
+

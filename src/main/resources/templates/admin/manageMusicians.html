@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>
+		Classical Musicians
+	</title>
+	<link rel="stylesheet" href="/css/stile.css" />
+	<link rel="stylesheet" href="/css/musicianFoto.css" />
+	<div th:replace="~{/fragments/fonts :: fonts}"></div>
+	<div th:replace="~{/fragments/viewport :: viewport}"></div>
+	<div th:replace="~{/fragments/bootstrap :: bootstrap}"></div>
+</head>
+<style>
+
+li{
+	list-style: none;
+}
+ul{
+	list-style: none;
+}
+</style>
+<body>
+	<div class="background">
+		<header>
+			<div th:replace="~{/fragments/header :: header}"></div>
+		</header>
+	</div>
+	<h1> Musicisti </h1>
+	<div th:if="${musicians==null || musicians.isEmpty()}">Non ci sono Musicisti nel sistema</div>
+	
+	<div class="album py-5 bg-body-tertiary">
+		<ul class="flex-container">
+			<div>
+				<div class="row row-cols-1 row-cols-sm-2 row-cols-md-6 g-3">
+					<li  class="col" th:each="musician : ${musicians}">
+						
+						<div class="card shadow-sm">
+							<p th:if="${musician.photo}">
+								<img  width="100%" th:src="@{'/display/image/' + ${musician.photo.id}}"/>
+							</p>
+							
+							<div class="card-body">
+								<a th:href="@{'/musician' + '/' + ${musician.id}}"><p class="card-text"  th:text="${musician.name} + ' ' + ${musician.surname}"></p></a>
+								<div class="d-flex justify-content-between align-items-center">
+									<strong th:text="'Data di nascita: '"> Data di nascita:</strong>
+									<span th:text="${#temporals.format(musician.dateOfBirth, 'dd-MM-yyyy')}">20/20/2000</span>
+								</div>
+								<div class="d-flex justify-content-between align-items-center" th:if="${musician.dateOfDeath!=null}">
+									<strong th:text="'Data di morte: '"> Data di morte:</strong>
+									<span th:text="${#temporals.format(musician.dateOfDeath, 'dd-MM-yyyy')}">20/20/2300</span>
+								</div>
+								<div class="d-grid gap-2 pt-1">
+									<a th:href="@{'/admin/removeMusician/' + ${musician.id}}"><button class="btn btn-danger" type="button">Rimuovi Musicista</button></a>
+								</div>
+								<div class="d-grid gap-2 pt-1">
+									<a th:href="@{'/admin/photoChange/' + ${musician.id}}"><button class="btn btn-warning" type="button">Modifica foto</button></a>
+								</div>
+								
+								<div class="d-grid gap-2 pt-1">
+									<a th:href="@{'/admin/dateChange/' + ${musician.id}}"><button class="btn btn-dark" type="button">Aggiorna Dati</button></a>
+								</div>
+							</div>
+						</div>
+					</li>
+				</div>
+			</div>
+		</ul>
+	</div>
+</body>
+</html>

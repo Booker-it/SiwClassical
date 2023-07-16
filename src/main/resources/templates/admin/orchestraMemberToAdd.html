@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<title>
+		Aggiungi Membro orchestra
+	</title>
+	<link rel="stylesheet" href="/css/stile.css" />
+	<link rel="stylesheet" href="/css/eventFoto.css" />
+	<div th:replace="~{/fragments/fonts :: fonts}"></div>
+	<div th:replace="~{/fragments/viewport :: viewport}"></div>
+	<div th:replace="~{/fragments/bootstrap :: bootstrap}"></div>
+</head>
+
+<body>
+	<div class="background">
+		<header>
+			<div th:replace="~{/fragments/header :: header}"></div>
+		</header>
+	</div>
+	
+	<h1 th:text="${'Membri orchestra per l ''evento '} + ${event.name} + ' - ' + ${event.location}"></h1>
+	<div>
+		<span th:text="${#temporals.format(event.dateEvent, 'dd-MM-yyyy HH:mm')}"></span>
+		<span  th:text="${event.city}"></span>
+	</div>
+	
+	<div th:if="${event.orchestra.isEmpty}"> Non ci sono membri per questa orchestra</div>
+	
+	
+	<ul>
+		<li th:each="musician : ${event.orchestra}">
+			<span th:text="${musician.name} + ' ' + ${musician.surname}"> Martha Argherich</span>
+			<a th:href="@{'/admin/removeOrchestraMemberFromEvent/'+ ${musician.id}+'/'+${event.id}}"> Rimuovi</a>
+		</li>
+	</ul>
+	
+	<strong>Musicisti che si possono aggiungere</strong>
+	<ul>
+		<li th:each="musician : ${musiciansToAdd}">
+			<span th:text="${musician.name} + ' ' + ${musician.surname}"> Martha Argherich</span>
+			<a th:href="@{'/admin/addOrchestraMemberToEvent/'+ ${musician.id}+'/'+${event.id}}">Aggiungi</a>
+		</li>
+	</ul>
+	
+	<div >
+		<a th:href="@{'/admin/formUpdateEvent/'+ ${event.id}}"><button type="button">Fine</button></a>
+	</div>
+	
+</body>
+</html>

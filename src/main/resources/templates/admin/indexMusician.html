@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<title>
+		SiwClassical - Gestione Musicisti
+	</title>
+	<link rel="stylesheet" href="/css/stile2.css" />
+	<link rel="stylesheet" href="/css/musicianFoto.css" />
+	<div th:replace="~{/fragments/fonts :: fonts}"></div>
+	<div th:replace="~{/fragments/viewport :: viewport}"></div>
+	<div th:replace="~{/fragments/bootstrap :: bootstrap}"></div>
+</head>
+
+<body>
+	<div class="background">
+		<header>
+			<div th:replace="~{/fragments/header :: header}"></div>
+		</header>
+	</div>
+
+	<div class="hm container bg-body-tertiary p-5 rounded mt-3">
+		<h1> Gestione Musicisti </h1>
+		<span><a href="/admin/formNewMusician"> <button type="button" class="btn btn-outline-dark"> Inserisci i dati di un musicista</button></a></span>
+		
+		<span><a href="/admin/manageMusicians"> <button type="button" class="btn btn-warning">Gestisci musicisti</button> </a></span>
+	</div>
+
+</body>
+</html>

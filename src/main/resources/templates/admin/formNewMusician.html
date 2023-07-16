@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<title>
+		Nuovo Musicista
+	</title>
+	<link rel="stylesheet" href="/css/stile.css" />
+	<link rel="stylesheet" href="/css/musicianFoto.css" />
+	<div th:replace="~{/fragments/fonts :: fonts}"></div>
+	<div th:replace="~{/fragments/viewport :: viewport}"></div>
+	<div th:replace="~{/fragments/bootstrap :: bootstrap}"></div>
+</head>
+
+<body>
+	<div class="background">
+		<header>
+			<div th:replace="~{/fragments/header :: header}"></div>
+		</header>
+	</div>
+
+	
+	<form class="container pt-5" th:action="@{/admin/musician}" method="POST" th:object="${musician}" accept-charset="UTF-8" enctype="multipart/form-data">
+		<h1>Aggiungi un Musicista</h1>
+		<div th:if="${#fields.hasGlobalErrors()}">
+			<p th:each="err : ${#fields.globalErrors()}" th:text="${err}">...</p>
+		</div>
+		
+		<div class="form-floating mb-3">
+			<strong>Nome: </strong>
+			<span><input class="form-control"  type="text" th:field="${musician.name}"required /></span>
+			<span th:if="${#fields.hasErrors('name')}" th:errors="*{name}" th:style="'color:red'">
+		</div>
+		
+		<div class="form-floating mb-3">
+			<strong> Cognome: </strong>
+			<span><input class="form-control" type="text" th:field="${musician.surname}"required /></span>
+			<span th:if="${#fields.hasErrors('surname')}" th:errors="*{surname}" th:style="'color:red'">
+		</div>
+		
+		<div class="form-floating mb-3">
+			<strong> nazionalit&agrave;: </strong>
+			<span><input class="form-control"  type="text" th:field="${musician.nationality}"required /></span>
+			<span th:if="${#fields.hasErrors('nationality')}" th:errors="*{nationality}" th:style="'color:red'">
+		</div>
+		
+		<div class="form-floating mb-3">
+			<strong>Data di nascita: </strong>
+			<span><input class="form-control"  type="date" th:field="${musician.dateOfBirth}"required /></span>
+			<span th:if="${#fields.hasErrors('dateOfBirth')}" th:errors="*{dateOfBirth}" th:style="'color:red'">
+		</div>
+		
+		<div class="form-floating mb-3">
+			<strong>Data di morte: </strong>
+			<span><input class="form-control"  type="date" th:field="${musician.dateOfDeath}" /></span>
+			<span th:if="${#fields.hasErrors('dateOfDeath')}" th:errors="*{dateOfDeath}" th:style="'color:red'">
+		</div>
+		
+		
+		<h2>Aggiungi foto</h2>
+		<div class="form-floating mb-3">
+				<span><input class="form-control" id="file" type="file" name="image" required accept="image/png, image/jpeg" /></span>
+		</div>
+		
+		
+		<h3>Aggiungi Biografia</h3>
+		<div class="form-floating mb-3">
+			<textarea class="form-control" id="floatingTextarea"  placeholder="Lascia un Commento"  name = "biography" maxlength="6000" cols="60" rows="20" style="height:100%;" th:field="${musician.biography}" required = "required"></textarea>
+		</div>
+				
+		<div class="pb-5">
+			<span><button class="btn btn-outline-dark" type="submit" >Fine</button> </span>
+		</div>
+	</form>
+
+</body>
+</html>
+
+	
+		
+		

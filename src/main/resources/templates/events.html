@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<title>
+		Classical Events
+	</title>
+	<link rel="stylesheet" href="/css/events.css" />
+	<link rel="stylesheet" href="/css/eventFoto.css" />
+	<div th:replace="~{/fragments/fonts :: fonts}"></div>
+	<div th:replace="~{/fragments/viewport :: viewport}"></div>
+	<div th:replace="~{/fragments/bootstrap :: bootstrap}"></div>
+</head>
+
+
+
+<body>
+	<div class="background">
+		<header>
+			<div th:replace="~{/fragments/header :: header}"></div>
+		</header>
+	</div>
+	
+	<h1 class="text-center pt-5"> Eventi </h1>
+	<div class="text-center pt-5" th:if="${events==null || events.isEmpty()}">Non ci sono Eventi nel sistema</div>
+	<ul class="container text-center">
+		<div>
+			<li class="bg-body-tertiary p-5 rounded mt-3 row" th:each="event : ${events}">
+				
+				<div class="col" th:if="${event.poster}">
+					<img class="bd-placeholder-img" width="200" height="250" th:src="@{'/display/image/' + ${event.poster.id}}"/>
+				</div>
+				
+				<div class="col">
+					<h3  th:text="${event.name} + ' - ' + ${event.location}"></h3>
+				
+				
+					<p  th:text="${event.city} + ', ' + ${#temporals.format(event.dateEvent, 'dd-MM-yyyy HH:mm')}"></p>
+				
+				</div>
+				
+				<div class="col button">
+					<a th:href="@{'/event' + '/' + ${event.id}}"><button class="btn btn-lg btn-outline-primary">Mostra evento</button></a>
+				</div>
+			</li>
+		</div>
+	</ul>
+	
+</body>
+</html>

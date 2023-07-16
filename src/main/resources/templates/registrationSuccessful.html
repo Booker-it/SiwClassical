@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>SiwClassical - Registrazione conclusa</title>
+	<link rel="stylesheet" href="/css/stile.css" />
+	<div th:replace="~{/fragments/fonts :: fonts}"></div>
+	<div th:replace="~{/fragments/viewport :: viewport}"></div>
+	<div th:replace="~{/fragments/bootstrap :: bootstrap}"></div>
+</head>
+
+<style>
+
+body{
+	background-image: url('./images/background.jpg');
+	background-size: cover;
+	background-repeat: no-repeat;
+	height: 100vh;
+	background-position: center;
+}
+
+</style>
+
+<body>
+	<header>
+		<div th:replace="~{/fragments/header :: header}"></div>
+	</header>
+
+	
+	<div class="container col-xl-10 col-xxl-8 px-4 py-5">
+		<div class="row align-items-center g-lg-5 py-5">
+			<div class="col-md-10 mx-auto col-lg-5">
+				<div class="p-4 p-md-5 border rounded-3 bg-body-tertiary">
+					<h1>Congratulazioni ti sei registrato!</h1>
+					<div class="form-floating mb-3">
+						<hr class="my-4">
+						<div>
+							<strong>Nome: </strong>
+							<span th:text="${user.name}"></span>
+						</div>
+						<div>
+							<strong>Cognome: </strong>
+							<span th:text="${user.surname}"></span>
+						</div>
+						<div>
+							<strong>Email: </strong>
+							<span th:text="${user.email}"></span>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>
+
+
+
